@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"> 
+        <my-container></my-container>   
+        <my-container></my-container>   
+        <my-container></my-container>   
+        <my-container></my-container>   
+    </div>
+    
+</body>
+<script src="./vue.js"></script>
+<script>
+    
+    const myContainer = {
+        template:`
+        <div>
+            <button v-on:click="handleReducer">-</button>
+            <strong>{{num}}</strong>
+            <button v-on:click="handleAdd">+</button>
+        </div>`,
+        data(){
+            return {
+                num:0
+            }
+        },
+        methods: {
+            handleReducer(){
+                this.num--
+            },
+            handleAdd(){
+                this.num++
+            }
+        }   
+    }
+    //注册组件
+    // Vue.component("my-container",myContainer)
+    const app = new Vue({
+        components: {
+            myContainer
+        },
+        el:"#app"
+    })
+</script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="todo" placeholder="添加todo"
+        v-on:keyup.enter="handleAdd">
+        <button v-on:click="handleAdd">添加</button>
+        <h2>正在进行</h2>
+        <ul class="no-done">
+            <li v-for="item in arr" v-if="!item.isDone">
+                <input type="checkbox" v-model="item.isDone">
+                <strong>{{item.todo}}</strong>
+            </li>
+        </ul>
+        <h2>已经完成</h2>
+        <ul class="done">
+            <li v-for="item in arr" v-if="item.isDone">
+            <input type="checkbox" v-model="item.isDone">
+                <del>{{item.todo}}</del>   
+            </li>
+        </ul>
+    </div>
+    
+</body>
+<script src="./vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            arr:[
+                {
+                    todo:"打代码",
+                    isDone:false
+                },
+                {
+                    todo:"找工作",
+                    isDone:false
+                },
+                {
+                    todo:"睡觉",
+                    isDone:false
+                }
+            ],
+            todo:""
+        },
+        methods: {
+            handleAdd(){
+                this.arr.push({
+                    todo:this.todo,
+                    isDone:false
+                })
+                this.todo=""
+            }
+        }
+    })
+</script>
+</html>

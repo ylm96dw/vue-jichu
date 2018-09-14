@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div id="app">
+        <!-- //my-btn全局组件 -->
+        <!-- <my-btn>你好啊</my-btn>
+        <my-btn>先生</my-btn>
+        <my-btn>我很好</my-btn> -->
+        <!-- my-btn局部组件 -->
+        <my-btn>全局</my-btn>
+        <my-think></my-think>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    // //全局组件
+    const myBtn = {
+        template:`<button class="my-btn">
+                <slot></slot>
+            </button>`
+    }
+    // //全局注册组件
+    // Vue.component("my-btn",myBtn)
+    const myThink={
+        template:`
+        <h1>
+            我是myThink
+            <my-btn>局部的</my-btn>
+        </h1>`
+    }
+    //注册组件
+    Vue.component("my-think",myThink)
+    Vue.component("my-btn",myBtn)
+    const app = new Vue({
+        el:"#app",
+        
+    })
+</script>
+</html>

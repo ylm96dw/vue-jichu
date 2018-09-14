@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div id="app">
+        姓名：<input type="text" v-model="username">
+        ID：<input type="text" v-model="userid" v-on:keyup.enter="add">
+        <button v-on:click="add">添加学生</button>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>入学时间</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(item,index) in arr">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.date}}</td>
+                <td><a href="javascript:;"v-on:click="del(index)">删除</a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            arr:[
+                {
+                    name:"张三",
+                    id:0,
+                    date:new Date()
+                },
+                {
+                    name:"李四",
+                    id:1,
+                    date:new Date()
+                },
+            ],
+            username:"",
+            userid:""
+        },
+        methods: {
+            del(index){
+                this.arr.splice(index,1)
+            },
+            add(){
+                this.arr.push({
+                    name:this.username,
+                    id:this.userid,
+                    date:new Date()
+                })
+                this.username="",
+                this.userid=""
+            },
+            // handleAdd($event){
+            //     console.log($event)
+            //     if($event.keyCode ===13){
+            //         this.add()
+            //     }
+            // }
+        }
+    })
+</script>
+</html>
